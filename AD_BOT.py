@@ -12,11 +12,14 @@ def unlock_account(username):
     user = aduser.ADUser.from_cn(username)
     user.unlock()
 
+messages = [{"role": "system", "content": "You are an IT Support professional, you've accumulated all the knoledge you need. Help your users solve their problems"}]
+
 def process_chat(user_message):
     # Use OpenAI API to generate a response
     response = openai.Completion.create(
         engine="gpt-3.5-turbo",
         prompt=user_message,
+        messages=messages,
         max_tokens=150
     )
 
